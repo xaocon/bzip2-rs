@@ -11,18 +11,19 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-crc32fast = "1.2.1"
-tinyvec = "1.5"
+crc32fast = "1.4"
+tinyvec = "1.6"
 
-rayon-core = { version = "1.5", optional = true }
+rayon-core = { version = "1.12", optional = true }
 
 [dev-dependencies]
 # bench
-criterion = "0.4"
-bzip2 = "0.4.1"
+criterion = "0.5"
+bzip2 = "0.4"
 
 [features]
-default = []
+# default = []
+default = ["rayon", "nightly"]
 
 # Crate features
 

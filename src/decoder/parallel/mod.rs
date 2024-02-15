@@ -1,6 +1,5 @@
 use std::collections::BTreeMap;
 use std::convert::TryInto;
-use std::mem;
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Arc;
 
@@ -17,7 +16,7 @@ mod reader;
 mod scanner;
 mod util;
 
-/// (block index, Result<(PreRead Block, Block)>)
+/// (block index, Result<(`PreRead` Block, Block)>)
 type ChannelledBlock = (u32, Result<(ReadableVec, Block), BlockError>);
 
 /// A low-level **multi-threaded** decoder implementation
@@ -248,7 +247,7 @@ impl<P: ThreadPool> ParallelDecoder<P> {
                 if buf.is_empty() || min_blocks >= self.pool.max_threads().get() {
                     // let's decode the blocks in `self.in_buf`
 
-                    let in_buf = mem::replace(&mut self.in_buf, Vec::new());
+                    let in_buf = std::mem::take(&mut self.in_buf);
                     let in_buf = Arc::<[u8]>::from(in_buf);
 
                     let in_buf_ = Arc::clone(&in_buf);

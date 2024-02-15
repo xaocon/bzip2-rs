@@ -120,7 +120,7 @@ impl<'a> BitReader<'a> {
                     buf[..bytes.len()].copy_from_slice(bytes);
                     self.bits = usize::from_be_bytes(buf);
 
-                    let bytes_slice = mem::replace(bytes, &[]);
+                    let bytes_slice = std::mem::take(bytes);
                     self.remaining_bits = (bytes_slice.len() * 8) as u8;
 
                     self.read_bits += u32::from(self.remaining_bits);

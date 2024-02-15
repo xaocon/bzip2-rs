@@ -53,14 +53,14 @@
     clippy::cast_lossless,
     clippy::doc_markdown,
     missing_docs,
-    broken_intra_doc_links
+    rustdoc::broken_intra_doc_links
 )]
 #![forbid(unsafe_code)]
 // TODO: remove once rustc 1.35 is our MSRV
-#![allow(clippy::manual_range_contains)]
+// #![allow(clippy::manual_range_contains)]
 // TODO: remove once rustc 1.40 is our msrv
-#![allow(clippy::mem_replace_with_default)]
-#![cfg_attr(feature = "nightly", feature(read_buf))]
+// #![allow(clippy::mem_replace_with_default)]
+#![cfg_attr(feature = "nightly", feature(read_buf, core_io_borrowed_buf))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 #[doc(no_inline)]
